@@ -9,7 +9,5 @@ public interface ProjectService {
 
 	Project createProject(Project project);
 
-	Project updateProject(Project project, long projectId);
-
 	Project getProject(long projectId);
 }

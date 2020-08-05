@@ -49,21 +49,6 @@ class ProjectRestControllerTest {
 	}
 
 	@Test
-	void testUpdateProjectPatch_withProjectIdAndUpdateFields_returnsProjectResponse() {
-
-		Project project = buildProject();
-		long projectId = 0L;
-
-		when(projectService.updateProject(project, projectId)).thenReturn(project);
-
-		ResponseEntity<Project> responseEntity = projectRestController.updateProject(project, projectId);
-
-		assertNotNull(responseEntity);
-		assertTrue(responseEntity.hasBody());
-		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-	}
-
-	@Test
 	void testGetProject_withProjectId_returnsProjectResponse() {
 
 		Project project = buildProject();

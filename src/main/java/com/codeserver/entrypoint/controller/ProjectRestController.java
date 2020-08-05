@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -61,19 +60,6 @@ public class ProjectRestController {
 		responseHeaders.setLocation(location);
 
 		return new ResponseEntity<>(project, responseHeaders, HttpStatus.CREATED);
-	}
-
-	@ApiOperation("Update a ProjectEntity")
-	@PatchMapping(ENDPOINT_ID)
-	public ResponseEntity<Project> updateProject(
-			@RequestBody Project project,
-			@PathVariable(PATH_VARIABLE_ID)
-			@Positive final long projectId
-	) {
-
-		Project updatedProject = projectService.updateProject(project, projectId);
-
-		return new ResponseEntity<>(updatedProject, HttpStatus.OK);
 	}
 
 }

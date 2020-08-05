@@ -62,25 +62,6 @@ public class ProjectPersistenceServiceImpl implements ProjectPersistenceService 
 	}
 
 	@Override
-	public Project updateProject(final Project project) {
-
-		try {
-
-			final Optional<SdlcSystemEntity> optionalSdlcSystemEntity = sdlcSystemRepository.findById(project.getSdlcSystem().getId());
-
-			final ProjectEntity projectEntity = ProjectConverter.convertToExistingProjectEntity(project, optionalSdlcSystemEntity.get());
-
-			final ProjectEntity updatedProjectEntity = projectRepository.save(projectEntity);
-
-			return ProjectConverter.convertToProjectDomain(updatedProjectEntity, optionalSdlcSystemEntity.get());
-
-		} catch (final Exception e) {
-			throw new PersistenceException("Error updating ProjectEntity record");
-		}
-
-	}
-
-	@Override
 	public Boolean doesProjectExist(final String externalId, final long sdlcSystemId) {
 
 		return projectRepository.existsByExternalIdAndSdlcSystemEntity_Id(externalId, sdlcSystemId);

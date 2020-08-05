@@ -120,47 +120,6 @@ class ProjectPersistenceServiceTest {
 	}
 
 	@Test
-	void testUpdateProject_withInValidSDLCSystem__throwPersistenceException() {
-
-		ProjectEntity projectEntity = buildProjectEntity();
-
-		Project project = buildProject();
-
-		when(sdlcSystemRepository.findById(project.getSdlcSystem().getId())).thenReturn(Optional.empty());
-		when(projectRepository.save(projectEntity)).thenReturn(projectEntity);
-
-		assertThatExceptionOfType(PersistenceException.class).isThrownBy(() ->
-				this.projectPersistenceService.updateProject(project))
-				.withMessageContaining("Error updating ProjectEntity record");
-	}
-
-	@Test
-	void testUpdateProject_withValidProject_updateProjectEntity() {
-
-		ProjectEntity projectEntity = buildProjectEntity();
-
-		Project project = buildProject();
-
-		when(sdlcSystemRepository.findById(project.getSdlcSystem().getId())).thenReturn(Optional.of(projectEntity.getSdlcSystemEntity()));
-		when(projectRepository.save(projectEntity)).thenReturn(projectEntity);
-
-		Project response = projectPersistenceService.updateProject(project);
-
-		verify(this.projectRepository, times(1)).save((projectEntity));
-		verify(this.sdlcSystemRepository, times(1)).findById((project.getSdlcSystem().getId()));
-
-		assertNotNull(response);
-		assertEquals(projectEntity.getId(), response.getId());
-		assertEquals(projectEntity.getSdlcSystemEntity().getId(), response.getSdlcSystem().getId());
-		assertEquals(projectEntity.getExternalId(), response.getExternalId());
-		assertEquals(projectEntity.getName(), response.getName());
-		assertEquals(projectEntity.getSdlcSystemEntity().getDescription(), response.getSdlcSystem().getDescription());
-		assertEquals(projectEntity.getSdlcSystemEntity().getBaseUrl(), response.getSdlcSystem().getBaseUrl());
-		assertNull(projectEntity.getCreatedDate());
-		assertNull(projectEntity.getLastModifiedDate());
-	}
-
-	@Test
 	void testDoesProjectExist_withValidExternalIdAndSDLCSystemId_returnsTrue() {
 
 		String externalId = "externalId";

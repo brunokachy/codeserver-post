@@ -13,7 +13,5 @@ public interface ProjectPersistenceService {
 
 	Project createProject(Project project);
 
-	Project updateProject(Project project);
-
 	Boolean doesProjectExist(String externalId, long sdlcSystemId);
 }

@@ -23,17 +23,6 @@ public class ProjectConverter {
 		return projectEntity;
 	}
 
-	public static ProjectEntity convertToExistingProjectEntity(final Project project, final SdlcSystemEntity sdlcSystemEntity) {
-
-		final ProjectEntity projectEntity = new ProjectEntity();
-		projectEntity.setId(project.getId());
-		projectEntity.setExternalId(project.getExternalId());
-		projectEntity.setName(project.getName());
-		projectEntity.setSdlcSystemEntity(sdlcSystemEntity);
-
-		return projectEntity;
-	}
-
 	public static Project convertToProjectDomain(final ProjectEntity projectEntity, final SdlcSystemEntity sdlcSystemEntity) {
 
 		final SdlcSystem sdlcSystem = new SdlcSystem();
